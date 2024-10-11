@@ -2,13 +2,18 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
-- option to turn of e-mail logging
 
 ### Changed
 
 ### Fixed
 
 ### Updated
+
+## [8.0.2] - 2024-10-11
+
+
+### Added
+- option to turn of e-mail logging
 
 ## [8.0.1] - 2024-10-11
 
