@@ -58,6 +58,26 @@ class FancyEmail{
     }
 
     /**
+     * Store the e-mail in the db for statistics
+     */
+    private function storeEmail(){
+        global $wpdb;
+        if(SIM\getModuleOption(MODULE_SLUG, 'no-statistics')){
+            // Add e-mail to e-mails db
+            $wpdb->insert(
+                $this->mailTable ,
+                array(
+                    'subject'		=> $this->subject ,
+                    'recipients'	=> $this->recipients,
+                    'time_send'     => current_time('U')
+                )
+            );
+
+            $this->emailId   = $wpdb->insert_id;
+        }
+    }
+
+    /**
      * Filters all WP_Mail arguments
      *
      * @param   array   $args   the array of wp_mail arguments
@@ -65,8 +85,6 @@ class FancyEmail{
      * @return  array           The filtered args
      */
     public function filterMail($args){
-        global $wpdb;
-
         $this->subject      = &$args['subject'];
 
         $this->recipients   = &$args['to'];
@@ -151,18 +169,8 @@ class FancyEmail{
 
             wp_mail($this->recipients, $subject, $this->message, $args['headers'], $remaining);
         }
-        
-        // Add e-mail to e-mails db
-        $wpdb->insert(
-            $this->mailTable ,
-            array(
-                'subject'		=> $this->subject ,
-                'recipients'	=> $this->recipients,
-                'time_send'     => current_time('U')
-            )
-        );
 
-        $this->emailId   = $wpdb->insert_id;
+        $this->storeEmail();
 
         //force html e-mail
         if(!in_array("Content-Type: text/html; charset=UTF-8", $this->headers)){
@@ -244,7 +252,7 @@ class FancyEmail{
      * @return  string              Replace html
      */
     public function urlReplace($matches){
-        if(empty($matches)){
+        if(empty($matches) || !SIM\getModuleOption(MODULE_SLUG, 'no-statistics')){
             return false;
         }
 
@@ -259,10 +267,12 @@ class FancyEmail{
         $url        = str_replace(['http://', 'https://', 'http://https://'], 'https://', $url);
         $url        = str_replace('https://https://', 'https://', $url);
 
+        
         // Change to rest-api url
         $newUrl    = "$this->mailTrackerUrl?mailid=$this->emailId&url=".urlencode($url);
 
         $html	    = str_replace($url, $newUrl, $html);
+
         return $html;
     }
 
@@ -281,9 +291,11 @@ class FancyEmail{
         $pattern = "/<img\s*src=[\"|']([^\"']*)[\"|']/i";
         $message = preg_replace_callback($pattern, array($this, 'checkEmailImages'), $this->message);
 
-        //Enable e-mail tracking
-        $pattern = "/href=[\"|']([^\"']*)[\"|']/i";
-        $message = preg_replace_callback($pattern, array($this, 'urlReplace'), $message);
+        if(SIM\getModuleOption(MODULE_SLUG, 'no-statistics')){
+            //Enable e-mail tracking
+            $pattern = "/href=[\"|']([^\"']*)[\"|']/i";
+            $message = preg_replace_callback($pattern, array($this, 'urlReplace'), $message);
+        }
 
         //Replace all newline characters with html new line <br>
         $message  = str_replace("\n", '<br>', $message);
@@ -325,9 +337,13 @@ class FancyEmail{
                                     <td align="left" valign="top" class="content" style="word-wrap: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; mso-table-lspace: 0pt; mso-table-rspace: 0pt; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; color: #444; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight: normal; margin: 0; Margin: 0; text-align: left; font-size: 14px; mso-line-height-rule: exactly; line-height: 140%; padding: 20px 0px; text-align: center;">
                                         <?php
                                         echo apply_filters('sim_email_footer', $this->footer, $this->message);
-                                        $url    = "$this->mailTrackerUrl?mailid=$this->emailId&ver=$this->emailId";
+                                        
+                                        if(SIM\getModuleOption(MODULE_SLUG, 'no-statistics')){
+                                            $url    = "$this->mailTrackerUrl?mailid=$this->emailId&ver=$this->emailId";
+                                            
+                                            echo "<img src='$url' alt='.' width='1px' height='1px'>";
+                                        }
                                         ?>
-                                        <img src="<?php echo $url;?>" alt="." width="1px" height="1px">
                                     </td>
                                 </tr>
                             </table>

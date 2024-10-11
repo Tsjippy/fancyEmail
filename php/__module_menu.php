@@ -50,6 +50,11 @@ add_filter('sim_submenu_options', function($optionsHtml, $moduleSlug, $settings)
 	
     ?>
 	<label>
+		<input type='checkbox' name='no-statistics' value='true' <?php if(isset($settings['no-statistics'])){echo 'checked';}?>>
+		Do not keep statistics about e-mails
+	</label>
+	<br><br>
+	<label>
 		Default e-mail greeting<br>
 		<input type='text' name='closing' value='<?php if(isset($settings['closing'])){echo $settings['closing'];}else{echo 'Kind regards'; }?>'>
 	</label>
@@ -66,7 +71,7 @@ add_filter('sim_submenu_options', function($optionsHtml, $moduleSlug, $settings)
 	<br>
 	<br>
 	<label>
-		Max attachment size in MB<br>
+		Max attachment size in MB (multiple e-mails will be send to stay below the maximum if needed)<br>
 		<input type='number' name='maxsize' value='<?php if(isset($settings['maxsize'])){echo $settings['maxsize'];}?>'>
 	</label>
 	<br>
@@ -80,7 +85,7 @@ add_filter('sim_submenu_options', function($optionsHtml, $moduleSlug, $settings)
 	
 add_filter('sim_module_data', function($dataHtml, $moduleSlug, $settings){
 	//module slug should be the same as grandparent folder name
-	if($moduleSlug != MODULE_SLUG){
+	if($moduleSlug != MODULE_SLUG || !SIM\getModuleOption(MODULE_SLUG, 'no-statistics')){
 		return $dataHtml;
 	}
 
