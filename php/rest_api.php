@@ -76,7 +76,7 @@ function mailTracker(\WP_REST_Request $request) {
 
 	if(empty($url)){
 		// redirect to picture
-		$url = plugins_url('pictures/transparent.png', __DIR__).'?ver='.time();
+		$url = SIM\pathToUrl(MODULE_PATH.'pictures/transparent.png').'?ver='.time();
 	}
 
 	wp_redirect( $url );
