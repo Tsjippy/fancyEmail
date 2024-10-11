@@ -6,9 +6,14 @@
 ### Changed
 
 ### Fixed
-- module menu
 
 ### Updated
+
+## [8.0.3] - 2024-10-11
+
+
+### Fixed
+- module menu
 
 ## [8.0.2] - 2024-10-11
 
