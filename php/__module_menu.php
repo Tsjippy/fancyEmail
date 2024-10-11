@@ -50,7 +50,7 @@ add_filter('sim_submenu_options', function($optionsHtml, $moduleSlug, $settings)
 	
     ?>
 	<label>
-		<input type='checkbox' name='no-statistics' value='true' <?php if(isset($settings['no-statistics'])){echo 'checked';}?>>
+		<input type='checkbox' name='no-statistics' value='1' <?php if(isset($settings['no-statistics'])){echo 'checked';}?>>
 		Do not keep statistics about e-mails
 	</label>
 	<br><br>
@@ -60,12 +60,12 @@ add_filter('sim_submenu_options', function($optionsHtml, $moduleSlug, $settings)
 	</label>
 	<br><br>
 	<label>
-		<input type='checkbox' name='no-staging' value='true' <?php if(isset($settings['no-staging'])){echo 'checked';}?>>
+		<input type='checkbox' name='no-staging' value='1' <?php if(isset($settings['no-staging'])){echo 'checked';}?>>
 		Do not send e-mails from staging websites
 	</label>
 	<br>
 	<label>
-		<input type='checkbox' name='no-localhost' value='true' <?php if(isset($settings['no-localhost'])){echo 'checked';}?>>
+		<input type='checkbox' name='no-localhost' value='1' <?php if(isset($settings['no-localhost'])){echo 'checked';}?>>
 		Do not send e-mails from localhost
 	</label>
 	<br>
@@ -85,7 +85,7 @@ add_filter('sim_submenu_options', function($optionsHtml, $moduleSlug, $settings)
 	
 add_filter('sim_module_data', function($dataHtml, $moduleSlug, $settings){
 	//module slug should be the same as grandparent folder name
-	if($moduleSlug != MODULE_SLUG || !SIM\getModuleOption(MODULE_SLUG, 'no-statistics')){
+	if($moduleSlug != MODULE_SLUG || SIM\getModuleOption(MODULE_SLUG, 'no-statistics')){
 		return $dataHtml;
 	}
 
