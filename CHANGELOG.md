@@ -6,6 +6,7 @@
 ### Changed
 
 ### Fixed
+- module menu
 
 ### Updated
 
