@@ -5,6 +5,7 @@
 
 ### Changed
 - hooks
+- enqueing of styles and scripts
 
 ### Fixed
 
