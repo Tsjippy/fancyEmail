@@ -2,6 +2,7 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
+- option to turn of e-mail logging
 
 ### Changed
 
