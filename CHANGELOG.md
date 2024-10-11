@@ -4,12 +4,17 @@
 ### Added
 
 ### Changed
-- hooks
-- enqueing of styles and scripts
 
 ### Fixed
 
 ### Updated
+
+## [8.0.1] - 2024-10-11
+
+
+### Changed
+- hooks
+- enqueing of styles and scripts
 
 ## [8.0.0] - 2024-10-04
 
