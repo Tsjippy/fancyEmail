@@ -10,7 +10,8 @@ DEFINE(__NAMESPACE__.'\MODULE_PATH', plugin_dir_path(__DIR__));
 DEFINE(__NAMESPACE__.'\MODULE_SLUG', strtolower(basename(dirname(__DIR__))));
 
 //run on module activation
-add_action('sim_module_activated', function($moduleSlug){
+add_action('sim_module_activated', __NAMESPACE__.'\moduleActivated');
+function moduleActivated($moduleSlug){
 	//module slug should be the same as grandparent folder name
 	if($moduleSlug != MODULE_SLUG)	{
 		return;
@@ -19,9 +20,10 @@ add_action('sim_module_activated', function($moduleSlug){
 	// Create the dbs
 	$fancyEmail     = new FancyEmail();
 	$fancyEmail->createDbTables();
-});
+}
 
-add_filter('sim_submenu_options', function($optionsHtml, $moduleSlug, $settings){
+add_filter('sim_submenu_options', __NAMESPACE__.'\subMenuOptions', 10, 3);
+function subMenuOptions($optionsHtml, $moduleSlug, $settings){
 	//module slug should be the same as grandparent folder name
 	if($moduleSlug != MODULE_SLUG){
 		return $optionsHtml;
@@ -62,13 +64,14 @@ add_filter('sim_submenu_options', function($optionsHtml, $moduleSlug, $settings)
 	SIM\pictureSelector('header_image', 'e-mail header', $settings);
 
 	return ob_get_clean();
-}, 10, 3);
+}
 	
-add_filter('sim_module_data', function($dataHtml, $moduleSlug, $settings){
+add_filter('sim_module_data', __NAMESPACE__.'\moduleData', 10, 3);
+function moduleData($dataHtml, $moduleSlug, $settings){
 	//module slug should be the same as grandparent folder name
 	if($moduleSlug != MODULE_SLUG || SIM\getModuleOption(MODULE_SLUG, 'no-statistics')){
 		return $dataHtml;
 	}
 
 	return $dataHtml.emailStats();
-}, 10, 3);
+}

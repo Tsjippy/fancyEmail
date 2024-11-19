@@ -4,7 +4,8 @@ use SIM;
 
 global $wpdb;
 
-add_action( 'rest_api_init', function () {
+add_action( 'rest_api_init',  __NAMESPACE__.'\restApiInit');
+function restApiInit() {
 	//Route for e-mail tracking of today
 	register_rest_route(
 		RESTAPIPREFIX,
@@ -22,22 +23,25 @@ add_action( 'rest_api_init', function () {
 		'/mailfailed',
 		array(
 			'methods' 				=> \WP_REST_Server::ALLMETHODS,
-			'callback' 				=> function($wpRestRequest){
-				SIM\printArray($wpRestRequest->get_params());
-				return $wpRestRequest->get_params();
-			},
+			'callback' 				=> __NAMESPACE__.'\mailTracking',
 			'permission_callback' 	=> '__return_true',
 		)
 	);
-} );
+}
+
+function mailTracking($wpRestRequest){
+	SIM\printArray($wpRestRequest->get_params());
+	return $wpRestRequest->get_params();
+}
 
 // Make mailtracker rest api url publicy available
-add_filter('sim_allowed_rest_api_urls', function($urls){
+add_filter('sim_allowed_rest_api_urls', __NAMESPACE__.'\allowedRestApiUrls');
+function allowedRestApiUrls($urls){
 	$urls[]	= RESTAPIPREFIX.'/mailtracker';
 	$urls[]	= RESTAPIPREFIX.'/mailfailed';
 
 	return $urls;
-});
+}
 
 /**
  * Tracks if an e-mail is opened or not using an image with a url
