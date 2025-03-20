@@ -11,13 +11,14 @@ function mailFilter($args){
     return $args;
 }
 
-
 // skip mail if there are no recipients and mark as succesfull
 add_filter( 'pre_wp_mail', __NAMESPACE__.'\beforeMail', 99, 2);
 function beforeMail($shouldSkip, $atts ){
     if(empty($atts['to'])){
         return true;
     }
+
+    SIM\printArray($atts);
     return $shouldSkip;
 }
 
