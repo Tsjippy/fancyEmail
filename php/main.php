@@ -6,7 +6,7 @@ use SIM;
 add_filter('wp_mail', __NAMESPACE__.'\mailFilter', 10, 1);
 function mailFilter($args){
     $fancyEmail     = new FancyEmail();
-    $args = $fancyEmail->filterMail($args);
+    $args           = $fancyEmail->filterMail($args);
 
     return $args;
 }
@@ -14,7 +14,17 @@ function mailFilter($args){
 // skip mail if there are no recipients and mark as succesfull
 add_filter( 'pre_wp_mail', __NAMESPACE__.'\beforeMail', 99, 2);
 function beforeMail($shouldSkip, $atts ){
-    if(empty($atts['to'])){
+    if(
+        empty($atts['to'])        ||
+        (
+            SIM\getModuleOption(MODULE_SLUG, 'no-localhost') &&
+            $_SERVER['HTTP_HOST'] == 'localhost'
+        )                                                   ||
+        (
+            SIM\getModuleOption(MODULE_SLUG, 'no-staging') &&
+            get_option("wpstg_is_staging_site") == "true"
+        )
+    ){
         return true;
     }
 

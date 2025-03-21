@@ -107,17 +107,7 @@ class FancyEmail{
             $empty  = true;
         }
         
-        if(
-            $empty        ||
-            (
-                SIM\getModuleOption(MODULE_SLUG, 'no-localhost') &&
-                $_SERVER['HTTP_HOST'] == 'localhost'
-            )                                                   ||
-            (
-                SIM\getModuleOption(MODULE_SLUG, 'no-staging') &&
-                get_option("wpstg_is_staging_site") == "true"
-            )
-        ){
+        if($empty){
             $args['to'] = '';
             return $args;
         }
