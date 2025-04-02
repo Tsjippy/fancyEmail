@@ -28,7 +28,7 @@ function beforeMail($shouldSkip, $atts ){
         return true;
     }
 
-    SIM\printArray($atts);
+    //SIM\printArray($atts);
     return $shouldSkip;
 }
 
