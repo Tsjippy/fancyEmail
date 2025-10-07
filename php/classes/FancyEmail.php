@@ -271,7 +271,7 @@ class FancyEmail{
      */
     public function htmlEmail(){
         // Get the logo url and make public if private
-        $headerImageId    = SIM\getModuleOption(MODULE_SLUG, 'picture_ids')['header_image'];
+        $headerImageId    = SIM\getModuleOption(MODULE_SLUG, 'picture-ids')['header_image'];
         if(!$headerImageId){
             $headerImageId= get_theme_mod( 'custom_logo' );
         }

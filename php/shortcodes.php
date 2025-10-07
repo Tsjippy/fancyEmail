@@ -10,7 +10,7 @@ function emailStats(){
     $fancyEmail     = new FancyEmail();
 
     ob_start();
-    if(!empty($_POST['clear_email_stat_table'])){
+    if(!empty($_POST['clear-email-stat-table'])){
         $fancyEmail->clearTables();
         ?>
         <div class='success'>
@@ -49,8 +49,8 @@ function emailStats(){
     <h2>E-mail statistics</h2>
     <div class='table-wrapper'>
         <form method="POST" action="">
-            <input type="hidden" name="clear_email_stat_table" value="true">
-            <button class="button small" id="clear_email_stat_table">Clear e-mail statistics</button>
+            <input type="hidden" name="clear-email-stat-table" value="true">
+            <button class="button small" id="clear-email-stat-table">Clear e-mail statistics</button>
         </form>
         <form class="tablenav top" method="POST" action="">
 			<div class="alignleft">
