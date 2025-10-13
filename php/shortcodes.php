@@ -49,7 +49,7 @@ function emailStats(){
     <h2>E-mail statistics</h2>
     <div class='table-wrapper'>
         <form method="POST" action="">
-            <input type="hidden" name="clear-email-stat-table" value="true">
+            <input type="hidden" class="no-reset" name="clear-email-stat-table" value="true">
             <button class="button small" id="clear-email-stat-table">Clear e-mail statistics</button>
         </form>
         <form class="tablenav top" method="POST" action="">
