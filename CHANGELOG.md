@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- use upgrade.php not install-helper.php
 
 ### Fixed
 
 ### Updated
+
+## [8.0.9] - 2025-10-30
+
+
+### Changed
+- use upgrade.php not install-helper.php
 
 ## [8.0.8] - 2025-10-13
 
