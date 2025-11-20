@@ -18,7 +18,10 @@ function beforeMail($shouldSkip, $atts ){
         empty($atts['to'])        ||
         (
             SIM\getModuleOption(MODULE_SLUG, 'no-localhost') &&
-            $_SERVER['HTTP_HOST'] == 'localhost'
+            (
+                $_SERVER['HTTP_HOST'] == 'localhost' || 
+                str_contains($_SERVER['HTTP_HOST'], '.local')
+            )
         )                                                   ||
         (
             SIM\getModuleOption(MODULE_SLUG, 'no-staging') &&
