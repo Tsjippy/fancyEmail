@@ -178,7 +178,7 @@ class FancyEmail{
             !str_contains(strtolower($this->message), 'blessings,') &&
             !str_contains(strtolower($this->message), 'cheers,')
         ){
-            $this->message	.= "<br><br><br>$defaultGreeting<br><br>".SITENAME;
+            $this->message	.= "$defaultGreeting<br><br>".SITENAME;
         }
 
         // Mention that this is an automated message
