@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- allow mail to be sent from local by flywheel
 
 ### Fixed
 
 ### Updated
+
+## [8.1.1] - 2025-12-12
+
+
+### Changed
+- allow mail to be sent from local by flywheel
 
 ## [8.1.0] - 2025-11-21
 
