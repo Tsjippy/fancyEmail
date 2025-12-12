@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- allow mail to be sent from local by flywheel
 
 ### Fixed
 
