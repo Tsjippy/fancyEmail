@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- removed extra br from greeting
 
 ### Fixed
 
 ### Updated
+
+## [8.1.2] - 2025-12-12
+
+
+### Changed
+- removed extra br from greeting
 
 ## [8.1.1] - 2025-12-12
 
