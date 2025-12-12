@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- removed extra br from greeting
 
 ### Fixed
 
