@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- newlines for greetings
 
 ### Fixed
 
