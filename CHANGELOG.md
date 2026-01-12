@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- newlines for greetings
 
 ### Fixed
 
 ### Updated
+
+## [8.1.3] - 2026-01-12
+
+
+### Changed
+- newlines for greetings
 
 ## [8.1.2] - 2025-12-12
 
