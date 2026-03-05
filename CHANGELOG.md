@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- trim message if needed
 
 ### Fixed
 
 ### Updated
+
+## [8.1.4] - 2026-03-05
+
+
+### Changed
+- trim message if needed
 
 ## [8.1.3] - 2026-01-12
 
