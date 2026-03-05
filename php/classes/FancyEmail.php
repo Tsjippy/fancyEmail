@@ -121,6 +121,8 @@ class FancyEmail{
 
         if(is_array($this->message)){
             SIM\printArray($this->message);
+        }else{
+            $this->message = trim($this->message ?? '');
         }
 
         // max attachment size
@@ -288,7 +290,9 @@ class FancyEmail{
         }
 
         //Replace all newline characters with html new line <br>
-        $message  = str_replace("\n", '<br>', $message);
+        if(!str_contains($message, '<br>') && !str_contains($message, '<p>') && !str_contains($message, '<div>')){
+            $message  = str_replace("\n", '<br>', $message);
+        }
 
         ob_start();
         ?>
