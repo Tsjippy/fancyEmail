@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- trim message if needed
 
 ### Fixed
 
