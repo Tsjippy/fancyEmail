@@ -186,7 +186,7 @@ class HtmlEmail
                     unset($args['attachments'][$index]);
                 }
             }
-        }elseif(!empty($args)){
+        }elseif(!empty($args['attachments'])){
             TSJIPPY\printArray($args);
         }
 
